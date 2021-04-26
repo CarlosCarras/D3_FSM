@@ -19,8 +19,6 @@ private:
     int cnt = 0;
 
 public:
-    unsigned long id = STATE_DETUMBLE;
-
     void enter(State* currentState) override {
         std::cout << "Entered Detumbling State!" << std::endl;
         moveToNext = false;
@@ -47,8 +45,6 @@ private:
     Initialize() = default;
 
 public:
-    unsigned long id = STATE_INITIALIZE;
-
     void enter(State* currentState) override {
         std::cout << "Entering Initialize State!" << std::endl;
         moveToNext = true;
