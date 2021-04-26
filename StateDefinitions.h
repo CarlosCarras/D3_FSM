@@ -13,24 +13,84 @@
 #define NUM_STATES          4
 
 
+/*************************************** GTrack ***************************************/
+
+class GTrack : public State {
+private:
+    GTrack() = default;
+    int cnt = 0;
+
+public:
+    void enter() override {
+        std::cout << "Entered GTrack State!" << std::endl;
+        moveToNext = false;
+    }
+
+    void loop() override {
+        std::cout << "Tracking..." << std::endl;
+        std::this_thread::sleep_for (std::chrono::seconds(1));
+        if (cnt++ > 5) moveToNext = true;
+    }
+
+    void exit() override {
+        std::cout << "Exiting GTrack State!" << std::endl;
+    }
+
+    static State &getInstance() {
+        static GTrack singleton;
+        return singleton;
+    }
+};
+
+/**************************************** Link ****************************************/
+
+class Link : public State {
+private:
+    Link() = default;
+    int cnt = 0;
+
+public:
+    void enter() override {
+        std::cout << "Entered Linking State!" << std::endl;
+        moveToNext = false;
+    }
+
+    void loop() override {
+        std::cout << "Linking..." << std::endl;
+        std::this_thread::sleep_for (std::chrono::seconds(1));
+        if (cnt++ > 5) moveToNext = true;
+    }
+
+    void exit() override {
+        std::cout << "Exiting Linking State!" << std::endl;
+    }
+
+    static State &getInstance() {
+        static Link singleton;
+        return singleton;
+    }
+};
+
+/************************************** DETUMBLE **************************************/
+
 class Detumble : public State {
 private:
     Detumble() = default;
     int cnt = 0;
 
 public:
-    void enter(State* currentState) override {
+    void enter() override {
         std::cout << "Entered Detumbling State!" << std::endl;
         moveToNext = false;
     }
 
-    void loop(State* currentState) override {
+    void loop() override {
         std::cout << "Detumbling..." << std::endl;
         std::this_thread::sleep_for (std::chrono::seconds(1));
         if (cnt++ > 5) moveToNext = true;
     }
 
-    void exit(State* currentState) override {
+    void exit() override {
         std::cout << "Exiting Detumbling State!" << std::endl;
     }
 
@@ -40,19 +100,21 @@ public:
     }
 };
 
+/************************************* Initialize *************************************/
+
 class Initialize : public State {
 private:
     Initialize() = default;
 
 public:
-    void enter(State* currentState) override {
+    void enter() override {
         std::cout << "Entering Initialize State!" << std::endl;
         moveToNext = true;
     }
 
-    void loop(State* currentState) override {}
+    void loop() override {}
 
-    void exit(State* currentState) override {
+    void exit() override {
         std::cout << "Exiting Initialize State!" << std::endl;
     }
 

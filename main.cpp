@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "D3.h"
-#include "StateDefinitions.h"
 
 int main() {
     D3 d3;

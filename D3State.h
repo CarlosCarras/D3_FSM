@@ -7,9 +7,9 @@ class State {
 public:
     bool moveToNext = false;
 
-    virtual void enter(State* currentState) = 0;
-    virtual void loop(State* currentState) = 0;
-    virtual void exit(State *currentState) = 0;
+    virtual void enter() = 0;
+    virtual void loop() = 0;
+    virtual void exit() = 0;
     virtual ~State() = default;
 };
 
